@@ -54,8 +54,98 @@ or EU (Frankfurt) regions.
 - Understanding more on bucket restrictions at:
 http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
  ```
+ ## Step 2: Create Source Code to Build
+Open Java compatible text editor (i.e Eclipse) and create the following directory structure.
+ ```
+ --src
+      |--main
+          |--java
+      |--test
+          |--java
+ ```
  
+Next create the following file in src/main/java
+
+ MessageUtil.java and implement the following code:
+ 
+ ```
+ public class MessageUtil {
+  private String message;
+ 
+  /* Constructor sets the strings of characters
+  public MessageUtil(String message) {
+    this.message = message;
+  }
+  /* This method creates the output
+  public String printMessage() {
+    System.out.println(message);
+    return message;
+  }
+  /* Produce the output of Hi and a string of characters casted into the message variable
+  public String salutationMessage() {
+    message = "Hi!" + message;
+    System.out.println(message);
+    return message;
+  }
+}
+ ```
+ ![img4](https://cloud.githubusercontent.com/assets/25268970/25297238/8176bb96-26ba-11e7-9d5f-ae49d9d8de45.jpg)
+ 
+ Next create the following file in src/test/jave: 
+ 
+ TestMessageUtil.java and implement the following code:
+ 
+ ```
+package test;
+
+import org.junit.Test;
+import main.java.MessageUtil;
+import org.junit.Ignore;
+import static org.junit.Assert.assertEquals;
+
+public class TestMessageUtil {
+	String message = "Robert";    
+	  MessageUtil messageUtil = new MessageUtil(message);
+	   
+	  @Test
+	  public void testPrintMessage() {      
+	    System.out.println("Inside testPrintMessage()");     
+	    assertEquals(message,messageUtil.printMessage());
+	  }
+
+	  @Test
+	  public void testSalutationMessage() {
+	    System.out.println("Inside testSalutationMessage()");
+	    message = "Hi!" + "Robert";
+	    assertEquals(message,messageUtil.salutationMessage());
+	  }
+}
+ ```
+ Next create the pom.xml file in the src folder and implement the following code:
+ 
+ ```
+ <?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.example</groupId>
+	<artifactId>messageUtil</artifactId>
+	<version>1.0</version>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
+ ```
+ ![img6](https://cloud.githubusercontent.com/assets/25268970/25298714/a31e5654-26c5-11e7-9857-dfa0b98a9f8c.jpg)
+
 ## Resource
-https://aws.amazon.com/s3/faqs/
+https://aws.amazon![img4](https://cloud.githubusercontent.com/assets/25268970/25297238/8176bb96-26ba-11e7-9d5f-ae49d9d8de45.jpg).com/s3/faqs/
+
 http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 
