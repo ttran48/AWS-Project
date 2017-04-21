@@ -4,11 +4,34 @@
 - AWS Free Tier includes 10 Metrics, 10 Alarms, and 1,000,000 API requests with <b>Amazon Cloudwatch</b>.
 
 ## Step 1: Creating/Configuring an S3 Bucket
-Create two S3 buckets.
+Create two S3 buckets by navigating to the AWS Management Console and opening the Amazon S3 Console. 
+Quck Access Link: https://console.aws.amazon.com/s3/home?region=us-west-2
+
+![img1](https://cloud.githubusercontent.com/assets/25268970/25292857/0c9c757c-26a6-11e7-9dff-cc3b7f05a5fa.jpg)
+
 - One of these buckets will store the build input. 
 Name this input bucket codebuild-region-ID-account-ID-input-bucket, where region-ID 
-represents the AWS region of the bucket, and account-ID represents your AWS account ID.
+represents the AWS region of the bucket, and account-ID represents your AWS account ID. Select Next.
 
+![im2](https://cloud.githubusercontent.com/assets/25268970/25293147/7bc3910a-26a7-11e7-9abe-4f29a1909ee2.jpg)
+
+A set properties window will populate. No properties will be set at this time, select Next.
+
+![image](https://cloud.githubusercontent.com/assets/25268970/25293246/f668ab0c-26a7-11e7-8789-b7577ee79e9e.png)
+```
+Notes: 
+Versioning – Versioning enables you to keep multiple versions of an object in one bucket. 
+Versioning is disabled for a new bucket by default. For information on enabling versioning, 
+see How Do I Enable or Suspend Versioning for an S3 Bucket?.
+
+Logging – Server access logging provides detailed records for the requests made to your 
+bucket. By default, Amazon S3 does not collect server access logs. To enable logging for the bucket, 
+choose Logging. To disable logging, choose Disable logging. Choose Save to save your settings.
+
+Tags – With AWS cost allocation, you can use tags to annotate billing for your use of a bucket. 
+A tag is a key-value pair that represents a label that you assign to a bucket. To add tags, choose Tags, 
+and then choose Add tag.
+```
 - The other bucket will store the build output. Name this output bucket codebuild-region-ID-account-ID-output-bucket.
 
 <i>Quick notes: 
@@ -17,7 +40,10 @@ represents the AWS region of the bucket, and account-ID represents your AWS acco
 - There is no limit to the number of objects that can be stored in a bucket and no difference in performance whether you use many buckets
 or just a few. You can store all of your objects in a single bucket, or you can organize them across several buckets.
 - Amazon S3 creates buckets in the AWS Region that you specify. You can choose any AWS Region that is geographically close to you to optimize latency, minimize costs, or address regulatory requirements. For example, if you reside in Europe, you might find it advantageous to create buckets in the EU (Ireland) or EU (Frankfurt) regions.
+- Understanding more on bucket restrictions at http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
  </i>
-
+ 
 ## Resource
 https://aws.amazon.com/s3/faqs/
+http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
+
