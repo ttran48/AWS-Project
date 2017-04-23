@@ -47,6 +47,7 @@ files in a file system.
 - There is no limit to the number of objects that can be stored in a bucket and no difference in 
 performance whether you use many bucketsor just a few. You can store all of your objects in a single 
 bucket, or you can organize them across several buckets.
+- The maximum size of a file that you can upload by using the Amazon S3 console is 78 GB
 - Amazon S3 creates buckets in the AWS Region that you specify. You can choose any AWS Region that 
 is geographically close to you to optimize latency, minimize costs, or address regulatory requirements. 
 For example, if you reside in Europe, you might find it advantageous to create buckets in the EU (Ireland) 
@@ -121,7 +122,7 @@ public class TestMessageUtil {
 	  }
 }
  ```
- Next create the pom.xml file in the src folder and implement the following code:
+ Next create the pom.xml file in the root folder where the src folder is stored and implement the following code:
  
  ```
  <?xml version="1.0" encoding="UTF-8"?>
@@ -144,8 +145,69 @@ public class TestMessageUtil {
  ```
  ![img6](https://cloud.githubusercontent.com/assets/25268970/25298714/a31e5654-26c5-11e7-9857-dfa0b98a9f8c.jpg)
 
+```
+Apache Maven will use the instructions in this file to convert the MessageUtil.java and TestMessageUtil.java files into a file named messageUtil-1.0.jar and then run the specified tests.
+```
+## Step 3: Create Build Spec
+```
+Quick Note: A build spec is a collection of build commands and related settings, in YAML format, that AWS CodeBuild uses to run a build. Without a build spec, AWS CodeBuild will not be able to successfully convert your build input into build output, nor will it be able to locate the build output artifact in the build environment to upload to your output bucket.
+```
+Create in buildspec.yml file in the root folder
+```
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn install
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - target/messageUtil-1.0.jar
+```
+## Step 4: Add the Source Code and the Build Spec to the Input Bucket
+Navigate to the local folder storing all the files that were just built and zip all files stored in the directory. Do not include the (root directory name) directory.
+
+Then navigate to https://console.aws.amazon.com/s3/ in your internet browser and double-click the input bucket.
+
+Upload the MessageUtil.zip file to the input bucket.
+
+![img7](https://cloud.githubusercontent.com/assets/25268970/25300149/e78fb196-26d6-11e7-9f43-c1fafdf09dd6.jpg)
+
+As displayed above, a window will populate with a set of processess that allow the user to change settings and permissions to the files that are being uploaded. The user can bypass this process by directly selecting and upload button and this will automatically set default values for the processes.
+
+## Step 5 Create the Build Project
+```
+Quick Note: A build project defines how AWS CodeBuild will run a build. It includes information 
+such as where to get the source code, the build environment to use, the build commands to run, 
+and where to store the build output. A build environment represents a combination of operating 
+ystem, programming language runtime, and tools that AWS CodeBuild uses to run a build. For this 
+build environment, you'll instruct AWS CodeBuild to use a Docker image that contains a version 
+of the Java Development Kit (JDK) and Apache Maven.
+```
+
+Navigate to https://us-west-2.console.aws.amazon.com/codebuild/home?region=us-west-2#/introduction
+
+Ensure that the correct region is selected. This can be found next to the User Account Name.
+
+
 ## Resource
 https://aws.amazon![img4](https://cloud.githubusercontent.com/assets/25268970/25297238/8176bb96-26ba-11e7-9d5f-ae49d9d8de45.jpg).com/s3/faqs/
 
 http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
+
+http://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-objects.html
+
+http://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+
+https://docs.docker.com/engine/docker-overview/
 
