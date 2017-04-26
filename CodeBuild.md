@@ -1,3 +1,20 @@
+## Prerequisite
+- AWS Account
+- Application source code/xml/build specification
+
+## Business Requirements - specific needs that must be addressed in order to achieve an objective
+- implement container to prevent
+- ease of storage access
+- tracking logs
+- Cost Tracking
+
+## Functional Requirements - how the needs will be delivered
+- Access Rights
+- User quantity
+- Ownership of data
+- services to be used
+
+## Notes
 - The AWS Free Tier includes 100 build minutes of build.general1.small per month with <b>AWS CodeBuild</b>.
 - AWS Free Tier includes 5GB storage, 20,000 Get Requests, and 2,000 Put Requests with <b>Amazon S3</b>.
 - 20,000 requests/month with <b>AWS Key Management Service</b>
@@ -198,6 +215,48 @@ of the Java Development Kit (JDK) and Apache Maven.
 Navigate to https://us-west-2.console.aws.amazon.com/codebuild/home?region=us-west-2#/introduction
 
 Ensure that the correct region is selected. This can be found next to the User Account Name.
+
+If a welcome page is displayed, choose Get started.
+
+If a welcome page is not displayed, then on the navigation pane, choose Build projects, and then choose Create project.
+
+On the Configure your project page, for Project name, type a name for this build project (in this example, codebuild-demo-project). Build project names must be unique across each AWS account. If you use a different name, substitute it throughout this walkthrough.
+
+## Step 6
+In Source: What to build, for Source provider, choose Amazon S3.
+
+## Step 7
+For Bucket, choose codebuild-region-ID-account-ID-input-bucket.
+
+## Step 8
+In Environment: How to build, for Environment image, leave Use an image managed by AWS CodeBuild selected.
+
+## Step 9
+For Runtime, choose Java.
+
+For Version, choose aws/codebuild/java:openjdk-8.
+
+For Build specification, leave Use the buildspec.yml in the source code root directory selected.
+
+In Artifacts: Where to put the artifacts from this build project, for Artifacts type, choose Amazon S3.
+
+Leave Artifacts name blank.
+
+For Bucket name, choose codebuild-region-ID-account-ID-output-bucket.
+
+In Service role, leave Create a service role in your account selected, and leave Role name unchanged.
+
+Choose Continue.
+
+On the Review page, choose Save.
+
+## Step 10 - run the build
+If the Build projects page is not displayed, then in the navigation pane, choose Build projects.
+
+In the list of build projects, choose codebuild-demo-project, and then choose Start build.
+
+On the Start new build page, choose Start build.
+
 
 
 ## Resource
